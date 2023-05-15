@@ -1,0 +1,7 @@
+vars:
+  - file: config/{{ target.name }}-cluster.yaml
+
+deployments:
+  - include: cluster-bootstrap
+  - barrier: true
+  - include: gitops

@@ -1,0 +1,7 @@
+targets:
+  - name: test
+    context: kind-test
+  - name: prod
+    context: kind-prod
+
+discriminator: cluster-gitops-{{ target.name }}

@@ -1,0 +1,4 @@
+deployments:
+  - git:
+      url: https://github.com/codablock/kluctl-cluster-bootstrap.git
+      ref: {{ versions.cluster_bootstrap }}
