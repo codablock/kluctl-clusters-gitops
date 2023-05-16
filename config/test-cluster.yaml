@@ -2,6 +2,11 @@ versions:
   cluster_bootstrap: main
   ingress:
     branch: main
+  podtato_head:
+    branch: main
 
 ingress:
   replicas: 1
+
+podtado_head:
+  image_version: "v0.3.1"
