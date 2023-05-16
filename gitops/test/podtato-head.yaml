@@ -13,7 +13,7 @@ spec:
 
   args:
     image_version: {{ podtado_head.image_version }}
-    force_legs: true
+    force_legs: false
 
   target: {{ target.name }}
   context: default
