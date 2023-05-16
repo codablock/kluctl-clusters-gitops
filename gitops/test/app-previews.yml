@@ -1,0 +1,100 @@
+apiVersion: templates.kluctl.io/v1alpha1
+kind: ListGithubPullRequests
+metadata:
+  name: app-previews
+  namespace: kluctl-system
+spec:
+  interval: 1m
+  # Replace the owner with your username in case you forked podtato-head
+  owner: codablock
+  repo: kluctl-deployment-app
+  # Ignore closed PRs
+  state: open
+  # Only PR's that go against the main branch
+  base: main
+  # Replace `podtato-head` with your username. This will only allows heads from your own fork!
+  # Otherwise, you risk deploying unsafe environments into your cluster!
+  head: codablock:.*
+---
+apiVersion: templates.kluctl.io/v1alpha1
+kind: ObjectTemplate
+metadata:
+  name: app-previews
+  namespace: kluctl-system
+spec:
+  serviceAccountName: template-controller
+  prune: true
+  matrix:
+    - name: pr
+      object:
+        ref:
+          apiVersion: templates.kluctl.io/v1alpha1
+          kind: ListGithubPullRequests
+          name: app-previews
+        jsonPath: status.pullRequests
+        expandLists: true
+  templates:
+# kluctl should not render the following templates
+{% raw %}
+    - raw: |
+        apiVersion: gitops.kluctl.io/v1beta1
+        kind: KluctlDeployment
+        metadata:
+          name: preview-{{ matrix.pr.head.ref | slugify }}
+          namespace: kluctl-system
+        spec:
+          interval: 1m
+          timeout: 5m
+          source:
+            url: https://github.com/codablock/kluctl-deployment-app.git
+            ref:
+              branch: {{ matrix.pr.head.ref }}
+          
+          target: "preview"
+          context: default
+          args:
+            env_name: "{{ matrix.pr.head.ref | slugify }}"
+            force_legs: {{ True if (get_var("matrix.pr.labels", []) | selectattr("name", "equalto", "legs") | list | length > 0) else False }}
+
+          dryRun: false
+          prune: true
+          delete: true
+          validate: true
+    - object:
+        apiVersion: templates.kluctl.io/v1alpha1
+        kind: TextTemplate
+        metadata:
+          name: "preview-status-{{ matrix.pr.head.ref | slugify }}"
+          namespace: kluctl-system
+        spec:
+          serviceAccountName: template-controller
+          inputs:
+            - name: kd
+              object:
+                ref:
+                  apiVersion: gitops.kluctl.io/v1beta1
+                  kind: KluctlDeployment
+                  name: preview-{{ matrix.pr.head.ref | slugify }}
+          templateRef:
+            configMap:
+              name: status-template
+              key: status.md
+    - raw: |
+        apiVersion: templates.kluctl.io/v1alpha1
+        kind: GithubComment
+        metadata:
+          name: preview-{{ matrix.pr.head.ref | slugify }}
+          namespace: kluctl-system
+        spec:
+          github:
+            owner: codablock
+            repo: kluctl-deployment-app
+            pullRequestId: {{ matrix.pr.number }}
+            tokenRef:
+              secretName: github-credentials
+              key: github_token
+          comment:
+            source:
+              textTemplate:
+                name: "preview-status-{{ matrix.pr.head.ref | slugify }}"
+{% endraw %}
