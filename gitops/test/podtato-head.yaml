@@ -1,0 +1,22 @@
+apiVersion: gitops.kluctl.io/v1beta1
+kind: KluctlDeployment
+metadata:
+  name: deployment-app
+  namespace: kluctl-system
+spec:
+  interval: 1m
+  timeout: 5m
+
+  source:
+    url: https://github.com/codablock/kluctl-deployment-app.git
+    ref: {{ versions.podtato_head | to_json }}
+
+  args:
+    image_version: {{ podtado_head.image_version }}
+    force_legs: false
+
+  target: {{ target.name }}
+  context: default
+
+  delete: true
+  prune: true
