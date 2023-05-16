@@ -15,6 +15,9 @@ spec:
   # Replace `podtato-head` with your username. This will only allows heads from your own fork!
   # Otherwise, you risk deploying unsafe environments into your cluster!
   head: codablock:.*
+  tokenRef:
+    secretName: github-credentials
+    key: github_token
 ---
 apiVersion: templates.kluctl.io/v1alpha1
 kind: ObjectTemplate
