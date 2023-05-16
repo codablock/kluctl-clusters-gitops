@@ -1,2 +1,7 @@
 versions:
   cluster_bootstrap: main
+  ingress:
+    branch: main
+
+ingress:
+  replicas: 1
