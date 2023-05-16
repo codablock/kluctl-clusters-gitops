@@ -1,0 +1,20 @@
+apiVersion: gitops.kluctl.io/v1beta1
+kind: KluctlDeployment
+metadata:
+  name: deployment-ingress
+  namespace: kluctl-system
+spec:
+  interval: 1m
+  timeout: 5m
+
+  source:
+    url: https://github.com/codablock/kluctl-deployment-ingress.git
+    ref: {{ versions.ingress | to_json }}
+
+  args:
+    replicas: {{ ingress.replicas }}
+
+  context: default
+
+  delete: true
+  prune: true
