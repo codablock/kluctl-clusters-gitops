@@ -40,7 +40,7 @@ spec:
 # kluctl should not render the following templates
 {% raw %}
     - raw: |
-        apiVersion: gitops.kluctl.io/v1beta1
+        apiVersion: flux.kluctl.io/v1alpha1
         kind: KluctlDeployment
         metadata:
           name: preview-{{ matrix.pr.head.ref | slugify }}
