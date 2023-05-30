@@ -1,15 +1,15 @@
-apiVersion: gitops.kluctl.io/v1beta1
-kind: KluctlDeployment
-metadata:
-  name: microservices-demo-test
-  namespace: kluctl-system
-spec:
-  interval: 10m
-  source:
-    url: https://github.com/kluctl/kluctl-examples.git
-    path: "./microservices-demo/3-templating-and-multi-env/"
-  timeout: 2m
-  target: test
-  context: default
-  prune: true
-  delete: true
+#apiVersion: gitops.kluctl.io/v1beta1
+#kind: KluctlDeployment
+#metadata:
+#  name: microservices-demo-test
+#  namespace: kluctl-system
+#spec:
+#  interval: 10m
+#  source:
+#    url: https://github.com/kluctl/kluctl-examples.git
+#    path: "./microservices-demo/3-templating-and-multi-env/"
+#  timeout: 2m
+#  target: test
+#  context: default
+#  prune: true
+#  delete: true
