@@ -10,7 +10,7 @@ spec:
   source:
     url: git@github.com:codablock/kluctl-clusters-gitops.git
     secretRef:
-      name: git-credentials
+      name: github-credentials
 
   target: {{ target.name }}
   context: default
