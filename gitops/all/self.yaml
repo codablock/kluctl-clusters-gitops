@@ -8,7 +8,9 @@ spec:
   timeout: 5m
 
   source:
-    url: https://github.com/codablock/kluctl-clusters-gitops.git
+    url: git@github.com:codablock/kluctl-clusters-gitops.git
+    secretRef:
+      name: git-credentials
 
   target: {{ target.name }}
   context: default
