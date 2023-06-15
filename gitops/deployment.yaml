@@ -1,3 +1,4 @@
 deployments:
   - path: all
+  - path: all-apps
   - path: {{ target.name }}
