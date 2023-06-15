@@ -3,5 +3,7 @@ targets:
     context: kind-test
   - name: prod
     context: kind-prod
+  - name: eks
+    context: kluctl-demo
 
 discriminator: cluster-gitops-{{ target.name }}
