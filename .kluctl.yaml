@@ -7,3 +7,7 @@ targets:
     context: kluctl-demo
 
 discriminator: cluster-gitops-{{ target.name }}
+
+args:
+  - name: kluctl_version
+    default: v2.21.0-devel
