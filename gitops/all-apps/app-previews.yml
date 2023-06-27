@@ -4,7 +4,7 @@ metadata:
   name: app-previews
   namespace: kluctl-system
 spec:
-  interval: 30s
+  interval: 31s
   # Replace the owner with your username in case you forked podtato-head
   owner: codablock
   repo: kluctl-deployment-app

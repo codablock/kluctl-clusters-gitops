@@ -5,7 +5,7 @@ metadata:
   namespace: kluctl-system
 spec:
   interval: 1m
-  timeout: 5m
+  timeout: 6m
 
   source:
     url: git@github.com:codablock/kluctl-clusters-gitops.git

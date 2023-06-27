@@ -5,7 +5,7 @@ metadata:
   namespace: kluctl-system
 spec:
   interval: 1m
-  timeout: 5m
+  timeout: 6m
 
   source:
     url: https://github.com/codablock/kluctl-deployment-app.git
