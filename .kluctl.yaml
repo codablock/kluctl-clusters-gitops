@@ -2,13 +2,13 @@ targets:
   - name: test
     context: kind-test
     args:
-      kluctl_version: v2.21.0-snapshot-amd64
+      kluctl_version: v2.21.0-snapshot-demo
   - name: prod
     context: kind-prod
   - name: eks
     context: kluctl-demo
     args:
-      kluctl_version: v2.21.0-snapshot-amd64
+      kluctl_version: v2.21.0-snapshot-demo
 
 discriminator: cluster-gitops-{{ target.name }}
 
