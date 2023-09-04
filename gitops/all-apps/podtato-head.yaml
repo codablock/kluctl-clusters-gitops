@@ -20,3 +20,5 @@ spec:
 
   delete: true
   prune: true
+
+  manual: true
