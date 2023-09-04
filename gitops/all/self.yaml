@@ -16,3 +16,4 @@ spec:
   context: default
 
   prune: true
+  manual: true
