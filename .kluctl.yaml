@@ -2,16 +2,16 @@ targets:
   - name: test
     context: kind-test
     args:
-      kluctl_version: v2.21.0-snapshot-demo
+      kluctl_version: v2.25.0
   - name: prod
     context: kind-prod
   - name: eks
     context: kluctl-demo
     args:
-      kluctl_version: v2.21.0-snapshot-demo
+      kluctl_version: v2.25.0
 
 discriminator: cluster-gitops-{{ target.name }}
 
 args:
   - name: kluctl_version
-    default: v2.21.0-devel
+    default: v2.25.0
