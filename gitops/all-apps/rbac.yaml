@@ -8,7 +8,7 @@ kind: Role
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: gitops
-  namespace: kluctl-system
+  namespace: gitops
 rules:
   - apiGroups: ["templates.kluctl.io/v1alpha1", "gitops.kluctl.io/v1beta1"]
     resources: ["*"]
